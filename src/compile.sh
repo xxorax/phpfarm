@@ -108,14 +108,17 @@ fi
 
 source 'options.sh' "$version" "$vmajor" "$vminor" "$vpatch"
 cd "$srcdir"
+
 #configuring
 #TODO: do not configure when config.nice exists
+#
+# --disable-short-tags \
+# --without-pear \
+#
 ./configure \
  --prefix="$instdir" \
  --exec-prefix="$instdir" \
  --enable-debug \
- --disable-short-tags \
- --without-pear \
  $configoptions
 
 if [ $? -gt 0 ]; then
@@ -124,7 +127,7 @@ if [ $? -gt 0 ]; then
 fi
 
 #compile sources
-#make clean
+make clean
 make
 if [ "$?" -gt 0 ]; then
     echo make failed.
