@@ -204,6 +204,24 @@ else
     exit 8
 fi
 
+#php-fpm may be called php-fpm.gcno or php-fpm.dSYM (Mac OS X)
+bphpfpm="$instdir/sbin/php-fpm"
+bphpfpmgcno="$instdir/sbin/php-fpm.gcno"
+bphpfpmdsym="$instdir/sbin/php-fpm.dSYM"
+
+if [ -f "$bphpfpmgcno" ]; then
+    mv "$bphpfpmgcno" "$bphpfpm"
+elif [ -f "$bphpfpmdsym" ]; then
+    mv "$bphpfpmdsym" "$bphpfpm"
+fi
+
+if [ -f "$bphpfpm" ]; then
+    ln -fs "$bphpfpm" "$shbindir/php-fpm-$version"
+else
+    echo "no php-fpm binary found"
+fi
+
+
 ln -fs "$instdir/bin/php-config" "$shbindir/php-config-$version"
 ln -fs "$instdir/bin/phpize" "$shbindir/phpize-$version"
 
