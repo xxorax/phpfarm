@@ -145,9 +145,9 @@ fi
 if [ "x$initarget" = x ]; then
     initarget="$instdir/lib/php.ini"
 fi
-if [ -f "php.ini-development" ]; then
-    #php 5.3
-    cp "php.ini-development" "$initarget"
+if [ -f "php.ini-production" ]; then
+    #php 5.3+
+    cp "php.ini-production" "$initarget"
 elif [ -f "php.ini-recommended" ]; then
     #php 5.1, 5.2
     cp "php.ini-recommended" "$initarget"
